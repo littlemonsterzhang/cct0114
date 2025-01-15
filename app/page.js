@@ -11,6 +11,19 @@ export default function Page() {
         <section className="flex flex-col items-center justify-center text-center gap-12 px-8 py-24">
           <h1 className="text-3xl font-extrabold">Ship Fast ⚡️</h1>
 
+          {/* Add the image input box here */}
+          <div className="w-full max-w-md">
+            <label htmlFor="image-upload" className="block text-sm font-medium mb-2">
+              Upload Image
+            </label>
+            <input
+              type="file"
+              id="image-upload"
+              accept="image/*"
+              className="file-input file-input-bordered w-full"
+            />
+          </div>
+          
           <p className="text-lg opacity-80">
             The start of your new startup... What are you gonna build?
           </p>
