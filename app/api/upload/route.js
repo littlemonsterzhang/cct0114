@@ -10,7 +10,7 @@ const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
   // Get user session from Supabase auth
-  async function getUserSession(request) {
+  async function getUserSession() {
     const { createServerComponentClient } = await import('@supabase/auth-helpers-nextjs');
     const { cookies } = await import('next/headers');
     
@@ -59,7 +59,7 @@ export async function POST(request) {
   try {
     const formData = await request.formData();
     const file = formData.get('file');
-    const userInfo = await getUserSession(request); // You'll need to implement this function
+    const userInfo = await getUserSession(); // You'll need to implement this function
 
     if (!file) {
       return NextResponse.json(
@@ -85,7 +85,6 @@ export async function POST(request) {
     if (file) {
         // await saveFileMetadata(file, userInfo);
         await saveFileMetadata(file,userInfo);
-
     }
     
 
