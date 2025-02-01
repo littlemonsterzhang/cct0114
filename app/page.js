@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ButtonSignin from "@/components/ButtonSignin";
-import ImageUpload from "@/components/ImageUpload";
+// import ImageUpload from "@/components/ImageUpload";
 
 export default function Page() {
   return (
