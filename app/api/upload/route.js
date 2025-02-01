@@ -86,7 +86,7 @@ export async function POST(request) {
         // await saveFileMetadata(file, userInfo);
         await saveFileMetadata(file,userInfo);
 
-    };
+    }
     
 
     return NextResponse.json({ 
