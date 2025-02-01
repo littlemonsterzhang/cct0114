@@ -9,39 +9,17 @@ const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-  // Get user session from Supabase auth
-  async function getUserSession(request) {
-    const { createServerComponentClient } = await import('@supabase/auth-helpers-nextjs');
-    const { cookies } = await import('next/headers');
-    
-    const supabase = createServerComponentClient({ cookies });
-    const { data: { session }, error } = await supabase.auth.getSession();
-    
-    if (error || !session?.user) {
-      throw new Error('Unauthorized');
-    }
-
-    return {
-      id: session.user.id,
-      email: session.user.email,
-      name: session.user.user_metadata?.full_name || session.user.email
-    };
-  }
-
-
 // 保存文件元数据的函数
-async function saveFileMetadata(file, userInfo) {
+async function saveFileMetadata(file) {
     const { name, size, type } = file; // 从文件对象中获取元数据
     const uploadedAt = new Date().toISOString(); // 当前时间
+  
     const { data, error } = await supabase.from('files_metadata').insert([
       {
         file_name: name,
         file_size: size,
         file_type: type,
         uploaded_at: uploadedAt,
-        user_id: userInfo.id,
-        user_email: userInfo.email,
-        user_name: userInfo.name,
       },
     ]);
   
@@ -59,7 +37,6 @@ export async function POST(request) {
   try {
     const formData = await request.formData();
     const file = formData.get('file');
-    const userInfo = await getUserSession(request); // You'll need to implement this function
 
     if (!file) {
       return NextResponse.json(
@@ -80,12 +57,9 @@ export async function POST(request) {
     // 2. Save file metadata to your database
     // 3. Associate the upload with the logged-in user
     // 示例：上传文件并保存元数据
-    console.log('Processing request:', userInfo);
-
+    
     if (file) {
-        // await saveFileMetadata(file, userInfo);
-        await saveFileMetadata(file,userInfo);
-
+        await saveFileMetadata(file);
     };
     
 

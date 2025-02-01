@@ -1,5 +1,4 @@
 import ButtonAccount from "@/components/ButtonAccount";
-import ImageUpload from "@/components/ImageUpload";
 
 export const dynamic = "force-dynamic";
 
@@ -13,11 +12,6 @@ export default async function Dashboard() {
         <ButtonAccount />
 
         <h1 className="text-3xl md:text-4xl font-extrabold">Private Page</h1>
-        
-        {/* Added ImageUpload component */}
-        <div className="mt-8">
-          <ImageUpload />
-        </div>
       </section>
     </main>
   );

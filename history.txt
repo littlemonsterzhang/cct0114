@@ -1,0 +1,2 @@
+npm install react-dropzone
+npm install @supabase/supabase-js
